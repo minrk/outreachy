@@ -28,12 +28,14 @@ Refresh the page to keep it up-to-date!
 ```
 
 ```{py-script}
+import js
 import pandas as pd
 from pyodide.http import open_url
 
 data = pd.read_csv(open_url("https://raw.githubusercontent.com/jupyterhub/outreachy/issue-data/project-table.csv"))
 
-display(data, target="project-table", append=False)
+display(data, target="project-table", append=False);
+js.renderTable();
 ```
 
 <div id="project-table" class="full-width project-table"></div>
@@ -47,12 +49,12 @@ display(data, target="project-table", append=False)
         src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 <script>
-$(document).ready( function () {
+  function renderTable() {
     $('.project-table table').DataTable( {
         "order": [[ 0, "template" ]],
         "pageLength": 25
     });
-} );
+  }
 </script>
 
 % Make the tables a little bit more compact since there's a lot of text
